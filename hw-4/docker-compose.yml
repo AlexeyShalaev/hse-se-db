@@ -1,0 +1,70 @@
+version: "3.9"
+
+x-postgres-common:
+  &postgres-common
+  image: postgres:15
+  user: postgres
+  healthcheck:
+      test: [ "CMD-SHELL", "pg_isready", "-d", "production"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+  restart: on-failure:3
+  networks:
+    - db-network
+
+services:
+  postgres-master:
+    <<: *postgres-common
+    container_name: db-postgres-master
+    environment:
+      POSTGRES_USER: avito
+      POSTGRES_PASSWORD: hackme
+      POSTGRES_DB: production
+      REPLICATION_USER: replicator
+      REPLICATION_PASSWORD: aboba
+      POSTGRES_HOST_AUTH_METHOD: "scram-sha-256\nhost replication all 0.0.0.0/0 md5"
+      POSTGRES_INITDB_ARGS: "--auth-host=scram-sha-256"
+    volumes:
+      - db-postgres-master-data:/var/lib/postgresql/data
+      - ./init-scripts:/docker-entrypoint-initdb.d/
+    ports:
+      - "15432:5432"
+    command: |
+      postgres 
+      -c wal_level=replica 
+      -c hot_standby=on 
+      -c max_wal_senders=10 
+      -c max_replication_slots=10 
+      -c hot_standby_feedback=on
+
+
+  postgres-slave:
+    <<: *postgres-common
+    container_name: db-postgres-slave
+    environment:
+      PGUSER: replicator
+      PGPASSWORD: replicator-password
+    depends_on:
+      - postgres-master
+    ports:
+      - "25432:5432"
+    command: |
+      bash -c "
+      rm -rf /var/lib/postgresql/data/*
+      until pg_basebackup --pgdata=/var/lib/postgresql/data -R --slot=replication_slot --host=postgres-master --port=5432
+      do
+      echo 'Waiting for primary to connect...'
+      sleep 1s
+      done
+      echo 'Backup done, starting replica...'
+      chmod 0700 /var/lib/postgresql/data
+      postgres
+      "
+
+networks:
+  db-network:
+
+volumes:
+  db-postgres-master-data:
+    name: db-postgres-master-data
