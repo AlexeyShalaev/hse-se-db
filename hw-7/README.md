@@ -47,4 +47,9 @@ db-service  | 4. В какой стране был наибольший проц
 db-service  | ('Guinea                                  ', Decimal('14.61187214611872146100'))                                                                                                                             
 db-service  | ----------------------------------
 db-service  | 5. Для Олимпийских игр 2000 года найдите 5 стран с минимальным соотношением количества групповых медалей к численности населения.
+db-service  | ('United States                           ', Decimal('3.0211480362537764350E-9'))                                                                                                                            
+db-service  | ('United Kingdom                          ', Decimal('1.4749262536873156E-8'))                                                                                                                               
+db-service  | ('France                                  ', Decimal('1.4925373134328358E-8'))                                                                                                                               
+db-service  | ('Canada                                  ', Decimal('2.6525198938992042E-8'))                                                                                                                               
+db-service  | ('Australia                               ', Decimal('4.0000000000000000E-8'))
 ```

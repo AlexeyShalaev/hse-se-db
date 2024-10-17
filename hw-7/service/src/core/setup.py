@@ -35,7 +35,7 @@ class FillDatabase:
         self._faker = Faker()
 
     async def run(
-        self, countries: int = 100, olympics: int = 50, players: int = 200, events: int = 200, results: int = 200
+        self, countries: int = 50, olympics: int = 50, players: int = 100, events: int = 100, results: int = 200
     ) -> None:
         await self.seed_countries(countries)
         await self.seed_olympics(olympics)
