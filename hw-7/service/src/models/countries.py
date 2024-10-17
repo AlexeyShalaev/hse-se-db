@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, CHAR
+from sqlalchemy import CHAR, Column, Integer
 
 from src.models import BaseTable
 

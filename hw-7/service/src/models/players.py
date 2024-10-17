@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Date, CHAR, ForeignKey
+from sqlalchemy import CHAR, Column, Date, ForeignKey
 
 from src.models import BaseTable
 
