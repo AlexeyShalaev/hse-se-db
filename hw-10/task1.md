@@ -11,8 +11,8 @@
    *План выполнения:*
     | QUERY PLAN |
     | :--- |
-    | Seq Scan on t\_books  \(cost=0.00..3099.00 rows=1 width=33\) \(actual time=8.386..8.387 rows=1 loops=1\) |
-    |   Filter: \(\(title\)::text = 'Oracle Core'::text\) |
+    | Seq Scan on t_books  (cost=0.00..3099.00 rows=1 width=33) (actual time=8.386..8.387 rows=1 loops=1) |
+    |   Filter: ((title)::text = 'Oracle Core'::text) |
     |   Rows Removed by Filter: 149999 |
     | Planning Time: 0.056 ms |
     | Execution Time: 8.403 ms |
@@ -48,9 +48,9 @@
    *Результат:*
     | schemaname | tablename | indexname | indexdef |
     | :--- | :--- | :--- | :--- |
-    | public | t\_books | t\_books\_id\_pk | CREATE UNIQUE INDEX t\_books\_id\_pk ON public.t\_books USING btree \(book\_id\) |
-    | public | t\_books | t\_books\_title\_idx | CREATE INDEX t\_books\_title\_idx ON public.t\_books USING btree \(title\) |
-    | public | t\_books | t\_books\_active\_idx | CREATE INDEX t\_books\_active\_idx ON public.t\_books USING btree \(is\_active\) |
+    | public | t_books | t_books_id_pk | CREATE UNIQUE INDEX t_books_id_pk ON public.t_books USING btree (book_id) |
+    | public | t_books | t_books_title_idx | CREATE INDEX t_books_title_idx ON public.t_books USING btree (title) |
+    | public | t_books | t_books_active_idx | CREATE INDEX t_books_active_idx ON public.t_books USING btree (is_active) |
 
    *Объясните результат:*
     - Запрос возвращает список индексов таблицы t_books, включая их схему, название и структуру.
@@ -79,8 +79,8 @@
    *План выполнения:*
     | QUERY PLAN |
     | :--- |
-    | Index Scan using t\_books\_title\_idx on t\_books  \(cost=0.42..8.44 rows=1 width=33\) \(actual time=0.037..0.038 rows=1 loops=1\) |
-    |   Index Cond: \(\(title\)::text = 'Oracle Core'::text\) |
+    | Index Scan using t_books_title_idx on t_books  (cost=0.42..8.44 rows=1 width=33) (actual time=0.037..0.038 rows=1 loops=1) |
+    |   Index Cond: ((title)::text = 'Oracle Core'::text) |
     | Planning Time: 0.220 ms |
     | Execution Time: 0.049 ms |
    
@@ -100,8 +100,8 @@
    *План выполнения:*
     | QUERY PLAN |
     | :--- |
-    | Index Scan using t\_books\_id\_pk on t\_books  \(cost=0.42..8.44 rows=1 width=33\) \(actual time=0.938..0.940 rows=1 loops=1\) |
-    |   Index Cond: \(book\_id = 18\) |
+    | Index Scan using t_books_id_pk on t_books  (cost=0.42..8.44 rows=1 width=33) (actual time=0.938..0.940 rows=1 loops=1) |
+    |   Index Cond: (book_id = 18) |
     | Planning Time: 0.084 ms |
     | Execution Time: 0.956 ms |
 
@@ -121,8 +121,8 @@
    *План выполнения:*
     | QUERY PLAN |
     | :--- |
-    | Seq Scan on t\_books  \(cost=0.00..2724.00 rows=75045 width=33\) \(actual time=0.008..9.913 rows=75131 loops=1\) |
-    |   Filter: is\_active |
+    | Seq Scan on t_books  (cost=0.00..2724.00 rows=75045 width=33) (actual time=0.008..9.913 rows=75131 loops=1) |
+    |   Filter: is_active |
     |   Rows Removed by Filter: 74869 |
     | Planning Time: 0.074 ms |
     | Execution Time: 11.845 ms |
@@ -145,7 +145,7 @@
    ```
    
    *Результат:*
-    | total\_rows | unique\_titles | unique\_categories | unique\_authors |
+    | total_rows | unique_titles | unique_categories | unique_authors |
     | :--- | :--- | :--- | :--- |
     | 150000 | 150000 | 6 | 1003 |
 
@@ -212,9 +212,9 @@
 
     | QUERY PLAN |
     | :--- |
-    | Index Scan using t\_books\_category\_author\_idx on t\_books  \(cost=0.29..8.23 rows=1 width=33\) \(actual time=0.021..0.021 rows=0 loops=1\) |
-    |   Index Cond: \(\(category\)::text = 'Database'::text\) |
-    |   Filter: \(\(title\)::text = 'Oracle Core'::text\) |
+    | Index Scan using t_books_category_author_idx on t_books  (cost=0.29..8.23 rows=1 width=33) (actual time=0.021..0.021 rows=0 loops=1) |
+    |   Index Cond: ((category)::text = 'Database'::text) |
+    |   Filter: ((title)::text = 'Oracle Core'::text) |
     | Planning Time: 0.309 ms |
     | Execution Time: 0.035 ms |
 
@@ -227,8 +227,8 @@
 
     | QUERY PLAN |
     | :--- |
-    | Index Scan using t\_books\_title\_idx on t\_books  \(cost=0.42..8.44 rows=1 width=33\) \(actual time=0.090..0.091 rows=1 loops=1\) |
-    |   Index Cond: \(\(title\)::text = 'Oracle Core'::text\) |
+    | Index Scan using t_books_title_idx on t_books  (cost=0.42..8.44 rows=1 width=33) (actual time=0.090..0.091 rows=1 loops=1) |
+    |   Index Cond: ((title)::text = 'Oracle Core'::text) |
     | Planning Time: 0.079 ms |
     | Execution Time: 0.104 ms |
 
@@ -241,8 +241,8 @@
 
     | QUERY PLAN |
     | :--- |
-    | Index Scan using t\_books\_category\_author\_idx on t\_books  \(cost=0.29..8.31 rows=1 width=33\) \(actual time=0.023..0.023 rows=1 loops=1\) |
-    |   Index Cond: \(\(\(category\)::text = 'Databases'::text\) AND \(\(author\)::text = 'Tom Lane'::text\)\) |
+    | Index Scan using t_books_category_author_idx on t_books  (cost=0.29..8.31 rows=1 width=33) (actual time=0.023..0.023 rows=1 loops=1) |
+    |   Index Cond: (((category)::text = 'Databases'::text) AND ((author)::text = 'Tom Lane'::text)) |
     | Planning Time: 0.078 ms |
     | Execution Time: 0.037 ms |
 
@@ -255,8 +255,8 @@
 
     | QUERY PLAN |
     | :--- |
-    | Index Scan using t\_books\_author\_book\_id\_idx on t\_books  \(cost=0.42..8.44 rows=1 width=33\) \(actual time=0.025..0.026 rows=1 loops=1\) |
-    |   Index Cond: \(\(\(author\)::text = 'Tom Lane'::text\) AND \(book\_id = 2025\)\) |
+    | Index Scan using t_books_author_book_id_idx on t_books  (cost=0.42..8.44 rows=1 width=33) (actual time=0.025..0.026 rows=1 loops=1) |
+    |   Index Cond: (((author)::text = 'Tom Lane'::text) AND (book_id = 2025)) |
     | Planning Time: 0.083 ms |
     | Execution Time: 0.042 ms |
         
@@ -275,8 +275,8 @@
     *План выполнения:*
     | QUERY PLAN |
     | :--- |
-    | Seq Scan on t\_books  \(cost=0.00..3099.00 rows=15 width=33\) \(actual time=68.579..68.580 rows=0 loops=1\) |
-    |   Filter: \(\(title\)::text \~\~\* 'Relational%'::text\) |
+    | Seq Scan on t_books  (cost=0.00..3099.00 rows=15 width=33) (actual time=68.579..68.580 rows=0 loops=1) |
+    |   Filter: ((title)::text \~\~\* 'Relational%'::text) |
     |   Rows Removed by Filter: 150000 |
     | Planning Time: 0.111 ms |
     | Execution Time: 68.595 ms |
@@ -312,8 +312,8 @@
     *План выполнения:*
     | QUERY PLAN |
     | :--- |
-    | Seq Scan on t\_books  \(cost=0.00..3474.00 rows=750 width=33\) \(actual time=39.883..39.884 rows=0 loops=1\) |
-    |   Filter: \(upper\(\(title\)::text\) \~\~ 'RELATIONAL%'::text\) |
+    | Seq Scan on t_books  (cost=0.00..3474.00 rows=750 width=33) (actual time=39.883..39.884 rows=0 loops=1) |
+    |   Filter: (upper((title)::text) \~\~ 'RELATIONAL%'::text) |
     |   Rows Removed by Filter: 150000 |
     | Planning Time: 0.289 ms |
     | Execution Time: 39.899 ms |
@@ -330,8 +330,8 @@
     *План выполнения:*
     | QUERY PLAN |
     | :--- |
-    | Seq Scan on t\_books  \(cost=0.00..3099.00 rows=15 width=33\) \(actual time=63.776..63.778 rows=1 loops=1\) |
-    |   Filter: \(\(title\)::text \~\~\* '%Core%'::text\) |
+    | Seq Scan on t_books  (cost=0.00..3099.00 rows=15 width=33) (actual time=63.776..63.778 rows=1 loops=1) |
+    |   Filter: ((title)::text \~\~\* '%Core%'::text) |
     |   Rows Removed by Filter: 149999 |
     | Planning Time: 0.109 ms |
     | Execution Time: 63.796 ms |
@@ -379,8 +379,8 @@
 
     | QUERY PLAN |
     | :--- |
-    | Seq Scan on t\_books  \(cost=0.00..3474.00 rows=750 width=33\) \(actual time=21.002..21.003 rows=1 loops=1\) |
-    |   Filter: \(reverse\(\(title\)::text\) \~\~ 'eroC%'::text\) |
+    | Seq Scan on t_books  (cost=0.00..3474.00 rows=750 width=33) (actual time=21.002..21.003 rows=1 loops=1) |
+    |   Filter: (reverse((title)::text) \~\~ 'eroC%'::text) |
     |   Rows Removed by Filter: 149999 |
     | Planning Time: 0.191 ms |
     | Execution Time: 21.013 ms |    
@@ -393,11 +393,11 @@
 
     | QUERY PLAN |
     | :--- |
-    | Bitmap Heap Scan on t\_books  \(cost=21.57..76.77 rows=15 width=33\) \(actual time=0.015..0.016 rows=1 loops=1\) |
-    |   Recheck Cond: \(\(title\)::text \~\~\* '%Core%'::text\) |
+    | Bitmap Heap Scan on t_books  (cost=21.57..76.77 rows=15 width=33) (actual time=0.015..0.016 rows=1 loops=1) |
+    |   Recheck Cond: ((title)::text \~\~\* '%Core%'::text) |
     |   Heap Blocks: exact=1 |
-    |   -&gt;  Bitmap Index Scan on t\_books\_trgm\_idx  \(cost=0.00..21.56 rows=15 width=0\) \(actual time=0.009..0.009 rows=1 loops=1\) |
-    |         Index Cond: \(\(title\)::text \~\~\* '%Core%'::text\) |
+    |   -&gt;  Bitmap Index Scan on t_books_trgm_idx  (cost=0.00..21.56 rows=15 width=0) (actual time=0.009..0.009 rows=1 loops=1) |
+    |         Index Cond: ((title)::text \~\~\* '%Core%'::text) |
     | Planning Time: 0.193 ms |
     | Execution Time: 0.032 ms |
     
@@ -418,11 +418,11 @@
     *План выполнения:*
     | QUERY PLAN |
     | :--- |
-    | Bitmap Heap Scan on t\_books  \(cost=116.57..120.58 rows=1 width=33\) \(actual time=0.036..0.037 rows=1 loops=1\) |
-    |   Recheck Cond: \(\(title\)::text = 'Oracle Core'::text\) |
+    | Bitmap Heap Scan on t_books  (cost=116.57..120.58 rows=1 width=33) (actual time=0.036..0.037 rows=1 loops=1) |
+    |   Recheck Cond: ((title)::text = 'Oracle Core'::text) |
     |   Heap Blocks: exact=1 |
-    |   -&gt;  Bitmap Index Scan on t\_books\_trgm\_idx  \(cost=0.00..116.57 rows=1 width=0\) \(actual time=0.025..0.025 rows=1 loops=1\) |
-    |         Index Cond: \(\(title\)::text = 'Oracle Core'::text\) |
+    |   -&gt;  Bitmap Index Scan on t_books_trgm_idx  (cost=0.00..116.57 rows=1 width=0) (actual time=0.025..0.025 rows=1 loops=1) |
+    |         Index Cond: ((title)::text = 'Oracle Core'::text) |
     | Planning Time: 0.124 ms |
     | Execution Time: 0.053 ms |
 
@@ -447,12 +447,12 @@
     *План выполнения:*
     | QUERY PLAN |
     | :--- |
-    | Bitmap Heap Scan on t\_books  \(cost=95.15..150.36 rows=15 width=33\) \(actual time=0.028..0.028 rows=0 loops=1\) |
-    |   Recheck Cond: \(\(title\)::text \~\~\* 'Relational%'::text\) |
+    | Bitmap Heap Scan on t_books  (cost=95.15..150.36 rows=15 width=33) (actual time=0.028..0.028 rows=0 loops=1) |
+    |   Recheck Cond: ((title)::text \~\~\* 'Relational%'::text) |
     |   Rows Removed by Index Recheck: 1 |
     |   Heap Blocks: exact=1 |
-    |   -&gt;  Bitmap Index Scan on t\_books\_trgm\_idx  \(cost=0.00..95.15 rows=15 width=0\) \(actual time=0.018..0.018 rows=1 loops=1\) |
-    |         Index Cond: \(\(title\)::text \~\~\* 'Relational%'::text\) |
+    |   -&gt;  Bitmap Index Scan on t_books_trgm_idx  (cost=0.00..95.15 rows=15 width=0) (actual time=0.018..0.018 rows=1 loops=1) |
+    |         Index Cond: ((title)::text \~\~\* 'Relational%'::text) |
     | Planning Time: 0.128 ms |
     | Execution Time: 0.044 ms |
     
@@ -485,8 +485,8 @@
     *План выполнения:*
     | QUERY PLAN |
     | :--- |
-    | Limit  \(cost=0.42..1.02 rows=10 width=33\) \(actual time=0.174..0.178 rows=10 loops=1\) |
-    |   -&gt;  Index Scan using t\_books\_desc\_idx on t\_books  \(cost=0.42..9062.40 rows=150000 width=33\) \(actual time=0.174..0.177 rows=10 loops=1\) |
+    | Limit  (cost=0.42..1.02 rows=10 width=33) (actual time=0.174..0.178 rows=10 loops=1) |
+    |   -&gt;  Index Scan using t_books_desc_idx on t_books  (cost=0.42..9062.40 rows=150000 width=33) (actual time=0.174..0.177 rows=10 loops=1) |
     | Planning Time: 0.267 ms |
     | Execution Time: 0.187 ms |
 

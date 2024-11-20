@@ -54,8 +54,8 @@
    *План выполнения:*
     | QUERY PLAN |
     | :--- |
-    | Seq Scan on t\_books\_part\_1 t\_books\_part  \(cost=0.00..1032.99 rows=1 width=32\) \(actual time=0.008..2.367 rows=1 loops=1\) |
-    |   Filter: \(book\_id = 18\) |
+    | Seq Scan on t_books_part_1 t_books_part  (cost=0.00..1032.99 rows=1 width=32) (actual time=0.008..2.367 rows=1 loops=1) |
+    |   Filter: (book_id = 18) |
     |   Rows Removed by Filter: 49998 |
     | Planning Time: 0.250 ms |
     | Execution Time: 2.380 ms |
@@ -73,15 +73,15 @@
    *План выполнения:*
     | QUERY PLAN |
     | :--- |
-    | Append  \(cost=0.00..3100.01 rows=3 width=33\) \(actual time=2.812..8.918 rows=1 loops=1\) |
-    |   -&gt;  Seq Scan on t\_books\_part\_1  \(cost=0.00..1032.99 rows=1 width=32\) \(actual time=2.811..2.812 rows=1 loops=1\) |
-    |         Filter: \(\(title\)::text = 'Expert PostgreSQL Architecture'::text\) |
+    | Append  (cost=0.00..3100.01 rows=3 width=33) (actual time=2.812..8.918 rows=1 loops=1) |
+    |   -&gt;  Seq Scan on t_books_part_1  (cost=0.00..1032.99 rows=1 width=32) (actual time=2.811..2.812 rows=1 loops=1) |
+    |         Filter: ((title)::text = 'Expert PostgreSQL Architecture'::text) |
     |         Rows Removed by Filter: 49998 |
-    |   -&gt;  Seq Scan on t\_books\_part\_2  \(cost=0.00..1033.00 rows=1 width=33\) \(actual time=2.716..2.716 rows=0 loops=1\) |
-    |         Filter: \(\(title\)::text = 'Expert PostgreSQL Architecture'::text\) |
+    |   -&gt;  Seq Scan on t_books_part_2  (cost=0.00..1033.00 rows=1 width=33) (actual time=2.716..2.716 rows=0 loops=1) |
+    |         Filter: ((title)::text = 'Expert PostgreSQL Architecture'::text) |
     |         Rows Removed by Filter: 50000 |
-    |   -&gt;  Seq Scan on t\_books\_part\_3  \(cost=0.00..1034.01 rows=1 width=34\) \(actual time=3.384..3.384 rows=0 loops=1\) |
-    |         Filter: \(\(title\)::text = 'Expert PostgreSQL Architecture'::text\) |
+    |   -&gt;  Seq Scan on t_books_part_3  (cost=0.00..1034.01 rows=1 width=34) (actual time=3.384..3.384 rows=0 loops=1) |
+    |         Filter: ((title)::text = 'Expert PostgreSQL Architecture'::text) |
     |         Rows Removed by Filter: 50001 |
     | Planning Time: 0.170 ms |
     | Execution Time: 8.936 ms |
@@ -107,13 +107,13 @@
    *План выполнения:*
     | QUERY PLAN |
     | :--- |
-    | Append  \(cost=0.29..24.94 rows=3 width=33\) \(actual time=0.033..0.081 rows=1 loops=1\) |
-    |   -&gt;  Index Scan using t\_books\_part\_1\_title\_idx on t\_books\_part\_1  \(cost=0.29..8.31 rows=1 width=32\) \(actual time=0.032..0.033 rows=1 loops=1\) |
-    |         Index Cond: \(\(title\)::text = 'Expert PostgreSQL Architecture'::text\) |
-    |   -&gt;  Index Scan using t\_books\_part\_2\_title\_idx on t\_books\_part\_2  \(cost=0.29..8.31 rows=1 width=33\) \(actual time=0.030..0.030 rows=0 loops=1\) |
-    |         Index Cond: \(\(title\)::text = 'Expert PostgreSQL Architecture'::text\) |
-    |   -&gt;  Index Scan using t\_books\_part\_3\_title\_idx on t\_books\_part\_3  \(cost=0.29..8.31 rows=1 width=34\) \(actual time=0.016..0.016 rows=0 loops=1\) |
-    |         Index Cond: \(\(title\)::text = 'Expert PostgreSQL Architecture'::text\) |
+    | Append  (cost=0.29..24.94 rows=3 width=33) (actual time=0.033..0.081 rows=1 loops=1) |
+    |   -&gt;  Index Scan using t_books_part_1_title_idx on t_books_part_1  (cost=0.29..8.31 rows=1 width=32) (actual time=0.032..0.033 rows=1 loops=1) |
+    |         Index Cond: ((title)::text = 'Expert PostgreSQL Architecture'::text) |
+    |   -&gt;  Index Scan using t_books_part_2_title_idx on t_books_part_2  (cost=0.29..8.31 rows=1 width=33) (actual time=0.030..0.030 rows=0 loops=1) |
+    |         Index Cond: ((title)::text = 'Expert PostgreSQL Architecture'::text) |
+    |   -&gt;  Index Scan using t_books_part_3_title_idx on t_books_part_3  (cost=0.29..8.31 rows=1 width=34) (actual time=0.016..0.016 rows=0 loops=1) |
+    |         Index Cond: ((title)::text = 'Expert PostgreSQL Architecture'::text) |
     | Planning Time: 0.582 ms |
     | Execution Time: 0.106 ms |
    
@@ -148,13 +148,13 @@
     *План выполнения:*
     | QUERY PLAN |
     | :--- |
-    | Append  \(cost=0.29..24.94 rows=3 width=33\) \(actual time=0.019..0.048 rows=1 loops=1\) |
-    |   -&gt;  Index Scan using t\_books\_part\_1\_title\_idx on t\_books\_part\_1  \(cost=0.29..8.31 rows=1 width=32\) \(actual time=0.019..0.019 rows=1 loops=1\) |
-    |         Index Cond: \(\(title\)::text = 'Expert PostgreSQL Architecture'::text\) |
-    |   -&gt;  Index Scan using t\_books\_part\_2\_title\_idx on t\_books\_part\_2  \(cost=0.29..8.31 rows=1 width=33\) \(actual time=0.016..0.016 rows=0 loops=1\) |
-    |         Index Cond: \(\(title\)::text = 'Expert PostgreSQL Architecture'::text\) |
-    |   -&gt;  Index Scan using t\_books\_part\_3\_title\_idx on t\_books\_part\_3  \(cost=0.29..8.31 rows=1 width=34\) \(actual time=0.011..0.011 rows=0 loops=1\) |
-    |         Index Cond: \(\(title\)::text = 'Expert PostgreSQL Architecture'::text\) |
+    | Append  (cost=0.29..24.94 rows=3 width=33) (actual time=0.019..0.048 rows=1 loops=1) |
+    |   -&gt;  Index Scan using t_books_part_1_title_idx on t_books_part_1  (cost=0.29..8.31 rows=1 width=32) (actual time=0.019..0.019 rows=1 loops=1) |
+    |         Index Cond: ((title)::text = 'Expert PostgreSQL Architecture'::text) |
+    |   -&gt;  Index Scan using t_books_part_2_title_idx on t_books_part_2  (cost=0.29..8.31 rows=1 width=33) (actual time=0.016..0.016 rows=0 loops=1) |
+    |         Index Cond: ((title)::text = 'Expert PostgreSQL Architecture'::text) |
+    |   -&gt;  Index Scan using t_books_part_3_title_idx on t_books_part_3  (cost=0.29..8.31 rows=1 width=34) (actual time=0.011..0.011 rows=0 loops=1) |
+    |         Index Cond: ((title)::text = 'Expert PostgreSQL Architecture'::text) |
     | Planning Time: 0.308 ms |
     | Execution Time: 0.064 ms |
 
@@ -188,8 +188,8 @@
     *План выполнения:*
     | QUERY PLAN |
     | :--- |
-    | Index Scan using t\_books\_part\_1\_book\_id\_idx on t\_books\_part\_1 t\_books\_part  \(cost=0.29..8.31 rows=1 width=32\) \(actual time=0.011..0.012 rows=1 loops=1\) |
-    |   Index Cond: \(book\_id = 11011\) |
+    | Index Scan using t_books_part_1_book_id_idx on t_books_part_1 t_books_part  (cost=0.29..8.31 rows=1 width=32) (actual time=0.011..0.012 rows=1 loops=1) |
+    |   Index Cond: (book_id = 11011) |
     | Planning Time: 0.237 ms |
     | Execution Time: 0.024 ms |
 
@@ -216,11 +216,11 @@
     *План выполнения:*
     | QUERY PLAN |
     | :--- |
-    | Bitmap Heap Scan on t\_books  \(cost=844.41..2823.11 rows=75370 width=33\) \(actual time=1.811..8.115 rows=75152 loops=1\) |
-    |   Recheck Cond: is\_active |
+    | Bitmap Heap Scan on t_books  (cost=844.41..2823.11 rows=75370 width=33) (actual time=1.811..8.115 rows=75152 loops=1) |
+    |   Recheck Cond: is_active |
     |   Heap Blocks: exact=1225 |
-    |   -&gt;  Bitmap Index Scan on t\_books\_active\_idx  \(cost=0.00..825.57 rows=75370 width=0\) \(actual time=1.696..1.697 rows=75152 loops=1\) |
-    |         Index Cond: \(is\_active = true\) |
+    |   -&gt;  Bitmap Index Scan on t_books_active_idx  (cost=0.00..825.57 rows=75370 width=0) (actual time=1.696..1.697 rows=75152 loops=1) |
+    |         Index Cond: (is_active = true) |
     | Planning Time: 0.173 ms |
     | Execution Time: 10.034 ms |
 
@@ -246,10 +246,10 @@
     *План выполнения:*
     | QUERY PLAN |
     | :--- |
-    | HashAggregate  \(cost=3475.00..3485.01 rows=1001 width=42\) \(actual time=49.888..49.990 rows=1003 loops=1\) |
+    | HashAggregate  (cost=3475.00..3485.01 rows=1001 width=42) (actual time=49.888..49.990 rows=1003 loops=1) |
     |   Group Key: author |
     |   Batches: 1  Memory Usage: 193kB |
-    |   -&gt;  Seq Scan on t\_books  \(cost=0.00..2725.00 rows=150000 width=21\) \(actual time=0.005..6.750 rows=150000 loops=1\) |
+    |   -&gt;  Seq Scan on t_books  (cost=0.00..2725.00 rows=150000 width=21) (actual time=0.005..6.750 rows=150000 loops=1) |
     | Planning Time: 0.217 ms |
     | Execution Time: 50.043 ms |
     
@@ -268,10 +268,10 @@
     *План выполнения:*
     | QUERY PLAN |
     | :--- |
-    | Limit  \(cost=0.42..56.61 rows=10 width=10\) \(actual time=0.108..0.335 rows=10 loops=1\) |
-    |   -&gt;  Result  \(cost=0.42..5625.42 rows=1001 width=10\) \(actual time=0.107..0.333 rows=10 loops=1\) |
-    |         -&gt;  Unique  \(cost=0.42..5625.42 rows=1001 width=10\) \(actual time=0.107..0.332 rows=10 loops=1\) |
-    |               -&gt;  Index Only Scan using t\_books\_author\_title\_index on t\_books  \(cost=0.42..5250.42 rows=150000 width=10\) \(actual time=0.105..0.258 rows=1345 loops=1\) |
+    | Limit  (cost=0.42..56.61 rows=10 width=10) (actual time=0.108..0.335 rows=10 loops=1) |
+    |   -&gt;  Result  (cost=0.42..5625.42 rows=1001 width=10) (actual time=0.107..0.333 rows=10 loops=1) |
+    |         -&gt;  Unique  (cost=0.42..5625.42 rows=1001 width=10) (actual time=0.107..0.332 rows=10 loops=1) |
+    |               -&gt;  Index Only Scan using t_books_author_title_index on t_books  (cost=0.42..5250.42 rows=150000 width=10) (actual time=0.105..0.258 rows=1345 loops=1) |
     |                     Heap Fetches: 4 |
     | Planning Time: 0.080 ms |
     | Execution Time: 0.349 ms |
@@ -291,11 +291,11 @@
     *План выполнения:*
     | QUERY PLAN |
     | :--- |
-    | Sort  \(cost=3100.29..3100.33 rows=15 width=21\) \(actual time=11.594..11.595 rows=1 loops=1\) |
+    | Sort  (cost=3100.29..3100.33 rows=15 width=21) (actual time=11.594..11.595 rows=1 loops=1) |
     |   Sort Key: author, title |
     |   Sort Method: quicksort  Memory: 25kB |
-    |   -&gt;  Seq Scan on t\_books  \(cost=0.00..3100.00 rows=15 width=21\) \(actual time=11.585..11.586 rows=1 loops=1\) |
-    |         Filter: \(\(author\)::text \~\~ 'T%'::text\) |
+    |   -&gt;  Seq Scan on t_books  (cost=0.00..3100.00 rows=15 width=21) (actual time=11.585..11.586 rows=1 loops=1) |
+    |         Filter: ((author)::text \~\~ 'T%'::text) |
     |         Rows Removed by Filter: 149999 |
     | Planning Time: 0.121 ms |
     | Execution Time: 11.610 ms |
@@ -339,8 +339,8 @@
     *План выполнения:*
     | QUERY PLAN |
     | :--- |
-    | Index Scan using t\_books\_cat\_idx on t\_books  \(cost=0.29..8.13 rows=1 width=21\) \(actual time=0.023..0.024 rows=1 loops=1\) |
-    |   Index Cond: \(category IS NULL\) |
+    | Index Scan using t_books_cat_idx on t_books  (cost=0.29..8.13 rows=1 width=21) (actual time=0.023..0.024 rows=1 loops=1) |
+    |   Index Cond: (category IS NULL) |
     | Planning Time: 0.262 ms |
     | Execution Time: 0.035 ms |
     
@@ -367,7 +367,7 @@
     *План выполнения:*
     | QUERY PLAN |
     | :--- |
-    | Index Scan using t\_books\_cat\_null\_idx on t\_books  \(cost=0.12..7.96 rows=1 width=21\) \(actual time=0.008..0.009 rows=1 loops=1\) |
+    | Index Scan using t_books_cat_null_idx on t_books  (cost=0.12..7.96 rows=1 width=21) (actual time=0.008..0.009 rows=1 loops=1) |
     | Planning Time: 0.198 ms |
     | Execution Time: 0.019 ms |
     
